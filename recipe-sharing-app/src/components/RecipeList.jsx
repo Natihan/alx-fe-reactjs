@@ -1,14 +1,18 @@
-import { Link } from 'react-router-dom';
 import { useRecipeStore } from '../recipeStore';
+import { Link } from 'react-router-dom';
 
 const RecipeList = () => {
-  const recipes = useRecipeStore((state) => state.recipes);
+  const recipes = useRecipeStore((state) => state.filteredRecipes); // Use filtered recipes
+  const searchTerm = useRecipeStore((state) => state.searchTerm); // Get current search term
+
+  // Show message when no recipes match the search term
+  const noResultsMessage = searchTerm ? 'No recipes found' : 'No recipes available';
 
   return (
     <div>
       <h2>Recipe List</h2>
       {recipes.length === 0 ? (
-        <p>No recipes available.</p>
+        <p>{noResultsMessage}</p>
       ) : (
         recipes.map((recipe) => (
           <div key={recipe.id}>
