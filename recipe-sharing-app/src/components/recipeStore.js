@@ -2,27 +2,34 @@ import create from 'zustand';
 
 const useRecipeStore = create((set) => ({
   recipes: [],
-  searchTerm: '',
-  filteredRecipes: [],
+  favorites: [], // Store user's favorite recipe IDs
+  recommendations: [], // Store recommended recipes
 
-  // Set the search term
-  setSearchTerm: (term) => set({ searchTerm: term }),
+  // Add recipe to favorites
+  addFavorite: (recipeId) => set((state) => {
+    // Prevent duplicate favorites
+    if (!state.favorites.includes(recipeId)) {
+      return { favorites: [...state.favorites, recipeId] };
+    }
+  }),
 
-  // Filter recipes based on the search term
-  filterRecipes: () =>
-    set((state) => {
-      const filtered = state.recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
-        recipe.description.toLowerCase().includes(state.searchTerm.toLowerCase())
-      );
-      return { filteredRecipes: filtered };
-    }),
+  // Remove recipe from favorites
+  removeFavorite: (recipeId) => set((state) => ({
+    favorites: state.favorites.filter((id) => id !== recipeId)
+  })),
 
-  // Add a new recipe
-  addRecipe: (newRecipe) => set((state) => ({ recipes: [...state.recipes, newRecipe] })),
+  // Generate recommendations based on favorites
+  generateRecommendations: () => set((state) => {
+    // Mock recommendation system: recommend recipes similar to the favorites
+    const recommended = state.recipes.filter((recipe) =>
+      state.favorites.includes(recipe.id) && Math.random() > 0.5
+    );
+    return { recommendations: recommended };
+  }),
 
-  // Set the list of recipes directly
+  // Add recipes to the store
   setRecipes: (recipes) => set({ recipes }),
+
 }));
 
 export { useRecipeStore };
