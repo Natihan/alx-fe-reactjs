@@ -1,3 +1,5 @@
+import React from 'react';
+import Counter from './components/Counter';
 import UserProfile from './components/UserProfile';
 import Header from './components/Header';
 import MainContent from './components/MainContent';
@@ -9,7 +11,14 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 
-
+function App() {
+  return (
+    <div>
+      <h1>Simple Counter Application</h1>
+      <Counter />  {/* Include the Counter component */}
+    </div>
+  );
+}
 function App() {
     return (
         <div>
