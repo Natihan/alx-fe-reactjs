@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Automatically normalize line endings
 * text=auto
 
@@ -17,3 +18,24 @@
 *.json diff=json
 *.xml diff=xml
 *.js diff=js
+=======
+# Automatically normalize line endings
+* text=auto
+
+# Explicitly treat certain files as binary to prevent diffs
+*.jpg binary
+*.png binary
+*.gif binary
+*.pdf binary
+
+# Treat markdown files as text
+*.md text
+
+# Force LF line endings for shell scripts
+*.sh text eol=lf
+
+# Specify how diffs should be handled for specific file types
+*.json diff=json
+*.xml diff=xml
+*.js diff=js
+>>>>>>> d818ecce53e4db5fca6a821cb8d587b1d08f6730
