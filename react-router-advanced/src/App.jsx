@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import ProfileDetails from './pages/ProfileDetails';
 import ProfileSettings from './pages/ProfileSettings';
 import BlogPost from './pages/BlogPost';
-import PrivateRoute from './components/PrivateRoute'; // Import PrivateRoute
+import PrivateRoute from './components/PrivateRoute'; // The protected route component
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -25,9 +25,10 @@ const App = () => {
             </li>
           </ul>
         </nav>
+
         <Routes>
           <Route path="/" element={<Home />} />
-          
+
           {/* Protected Profile Route */}
           <Route 
             path="/profile" 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
-// Profile component that renders nested routes like ProfileDetails and ProfileSettings
 const Profile = () => {
   return (
     <div>
@@ -13,7 +12,7 @@ const Profile = () => {
         </ul>
       </nav>
       
-      {/* The nested route will be rendered here */}
+      {/* Render the child routes here */}
       <Outlet />
     </div>
   );
