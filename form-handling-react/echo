@@ -16,3 +16,4 @@
 # Specify how diffs should be handled for specific file types
 *.json diff=json
 *.xml diff=xml
+*.js diff=js
