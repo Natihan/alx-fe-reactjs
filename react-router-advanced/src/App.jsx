@@ -2,8 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
-import Profile from './components/Profile';  // Profile layout component
-import BlogPost from './pages/BlogPost';
+import BlogPost from './pages/BlogPost'; // Import BlogPost component
 
 const App = () => {
   return (
@@ -12,16 +11,18 @@ const App = () => {
         <nav>
           <ul>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/profile">Profile</Link></li>
-            <li><Link to="/post/1">Post 1</Link></li>
+            <li><Link to="/blog/1">Blog Post 1</Link></li>
+            <li><Link to="/blog/2">Blog Post 2</Link></li>
+            <li><Link to="/blog/3">Blog Post 3</Link></li>
           </ul>
         </nav>
 
         <Routes>
-          {/* Main Routes */}
+          {/* Define other routes */}
           <Route path="/" element={<Home />} />
-          <Route path="/profile/*" element={<Profile />} /> {/* Profile component with nested routes */}
-          <Route path="/post/:id" element={<BlogPost />} />
+
+          {/* Define dynamic blog post route */}
+          <Route path="/blog/:id" element={<BlogPost />} />
         </Routes>
       </div>
     </Router>
