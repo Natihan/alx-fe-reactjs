@@ -1,6 +1,6 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import PostsComponent from './PostsComponent'; // This is the component that will fetch posts
+import PostsComponent from './components/PostsComponent'; // Import the PostsComponent
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
