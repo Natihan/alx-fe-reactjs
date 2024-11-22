@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import React from 'react';
+import Counter from './components/Counter';
+>>>>>>> 9e1e54e3d0609ce5f095cd43b111c9727e70d1b5
 import UserProfile from './components/UserProfile';
 import Header from './components/Header';
 import MainContent from './components/MainContent';
@@ -9,7 +14,18 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 
+<<<<<<< HEAD
 
+=======
+function App() {
+  return (
+    <div>
+      <h1>Simple Counter Application</h1>
+      <Counter />  {/* Include the Counter component */}
+    </div>
+  );
+}
+>>>>>>> 9e1e54e3d0609ce5f095cd43b111c9727e70d1b5
 function App() {
     return (
         <div>
