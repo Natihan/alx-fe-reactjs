@@ -19,6 +19,7 @@ function App() {
     </QueryClientProvider>
   );
 }
+
 const queryClient = new QueryClient();
 
 function App() {
