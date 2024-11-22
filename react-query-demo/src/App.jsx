@@ -1,7 +1,22 @@
+import React from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import PostsComponent from './PostsComponent'; // This is the component that will fetch posts
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+
+
+const queryClient = new QueryClient();
+
+function App() {
+  return (
+    // Provide the QueryClient to the component tree
+    <QueryClientProvider client={queryClient}>
+      <PostsComponent />
+    </QueryClientProvider>
+  );
+}
 
 function App() {
   const [count, setCount] = useState(0)
