@@ -5,9 +5,11 @@ import Home from './pages/Home';
 import BlogPost from './pages/BlogPost'; // Import BlogPost component
 import Login from './pages/Login'; // Import Login page
 import ProtectedRoute from './components/ProtectedRoute';  // Import ProtectedRoute component
+import useAuth from './hooks/useAuth'; // Import useAuth
+
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated, login, logout } = useAuth();  // Use the useAuth hook
 
   return (
     <Router>
@@ -18,24 +20,23 @@ const App = () => {
             <li><Link to="/profile">Profile</Link></li>
             <li><Link to="/post/1">Blog Post 1</Link></li>
             <li>
-              <button onClick={() => setIsAuthenticated(!isAuthenticated)}>
+              <button onClick={isAuthenticated ? logout : login}>
                 {isAuthenticated ? 'Logout' : 'Login'}
               </button>
             </li>
           </ul>
         </nav>
+
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/post/:id" element={<BlogPost />} />
-          <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+          <Route path="/login" element={<Login />} />
 
           {/* Protected Route */}
-          <Route 
-            path="/profile" 
-            element={
-              <ProtectedRoute isAuthenticated={isAuthenticated} element={<Profile />} />
-            }
+          <Route
+            path="/profile"
+            element={<ProtectedRoute element={<Profile />} />}
           />
         </Routes>
       </div>
