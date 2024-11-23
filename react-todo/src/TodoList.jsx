@@ -1,10 +1,11 @@
+// src/TodoList.jsx
 import React, { useState } from 'react';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([
     { id: 1, text: 'Buy groceries', completed: false },
     { id: 2, text: 'Clean the house', completed: false },
-    { id: 3, text: 'Walk the dog', completed: false },
+    { id: 3, text: 'Walk the dog', completed: false }
   ]);
   const [newTodo, setNewTodo] = useState('');
 
@@ -13,7 +14,7 @@ const TodoList = () => {
       const newTodoItem = {
         id: todos.length + 1,
         text: newTodo,
-        completed: false,
+        completed: false
       };
       setTodos([...todos, newTodoItem]);
       setNewTodo('');
