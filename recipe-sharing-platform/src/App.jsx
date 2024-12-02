@@ -6,7 +6,15 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import Router components
 import HomePage from './components/HomePage'; // Import HomePage component
 import RecipeDetail from './components/RecipeDetail';
+import AddRecipeForm from './components/AddRecipeForm';
 
+function App() {
+  return (
+    <div>
+      <AddRecipeForm />
+    </div>
+  );
+}
 
 function App() {
   return (
