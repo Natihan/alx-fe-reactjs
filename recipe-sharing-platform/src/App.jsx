@@ -3,7 +3,23 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import React from 'react';
-import HomePage from './components/HomePage'; // Import HomePage
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import Router components
+import HomePage from './components/HomePage'; // Import HomePage component
+import RecipeDetail from './components/RecipeDetail';
+
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        {/* HomePage Route */}
+        <Route path="/" element={<HomePage />} />
+        {/* Recipe Detail Route, dynamic path with :id */}
+        <Route path="/recipe/:id" element={<RecipeDetail />} />
+      </Routes>
+    </Router>
+  );
+}
 
 const App = () => {
   return (
