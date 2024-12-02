@@ -1,27 +1,90 @@
 [
-    {
-      "id": 1,
-      "title": "Spaghetti Carbonara",
-      "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-      "image": "https://via.placeholder.com/150"
-    },
-    {
-      "id": 2,
-      "title": "Chicken Tikka Masala",
-      "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.",
-      "image": "https://via.placeholder.com/150"
-    },
-    {
-      "id": 3,
-      "title": "Caesar Salad",
-      "summary": "A simple salad with romaine lettuce, croutons, parmesan cheese, and Caesar dressing.",
-      "image": "https://via.placeholder.com/150"
-    },
-    {
-      "id": 4,
-      "title": "Beef Stroganoff",
-      "summary": "Tender strips of beef in a rich, creamy mushroom sauce.",
-      "image": "https://via.placeholder.com/150"
-    }
-  ]
-  
+  {
+    "id": 1,
+    "title": "Spaghetti Carbonara",
+    "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "200g spaghetti",
+      "100g pancetta",
+      "2 eggs",
+      "50g parmesan",
+      "Black pepper"
+    ],
+    "instructions": [
+      "Boil the spaghetti.",
+      "Fry the pancetta until crispy.",
+      "Whisk the eggs and mix with parmesan.",
+      "Toss the spaghetti with pancetta, then add the egg mixture.",
+      "Serve with a sprinkle of black pepper."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Chicken Tikka Masala",
+    "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g chicken breast",
+      "200g yogurt",
+      "1 onion",
+      "2 cloves garlic",
+      "1 can tomato puree"
+    ],
+    "instructions": [
+      "Marinate chicken in yogurt and spices.",
+      "Grill the chicken until cooked.",
+      "Cook onion, garlic, and tomato puree in a pan.",
+      "Add grilled chicken to the pan and simmer.",
+      "Serve with rice."
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Caesar Salad",
+    "summary": "A simple salad with romaine lettuce, croutons, parmesan cheese, and Caesar dressing.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "1 head of romaine lettuce",
+      "1 cup croutons",
+      "1/2 cup parmesan cheese",
+      "1/4 cup Caesar dressing",
+      "1 tablespoon olive oil",
+      "Salt and pepper to taste"
+    ],
+    "instructions": [
+      "Wash and chop the romaine lettuce.",
+      "Toss lettuce with croutons and parmesan cheese.",
+      "Drizzle with Caesar dressing.",
+      "Add olive oil, salt, and pepper to taste.",
+      "Serve immediately."
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Beef Stroganoff",
+    "summary": "Tender strips of beef in a rich, creamy mushroom sauce.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g beef (sirloin or tenderloin)",
+      "1 onion, chopped",
+      "200g mushrooms, sliced",
+      "1 cup beef broth",
+      "1/2 cup sour cream",
+      "2 tablespoons flour",
+      "2 tablespoons butter",
+      "Salt and pepper to taste",
+      "Egg noodles, for serving"
+    ],
+    "instructions": [
+      "Slice beef into thin strips and season with salt and pepper.",
+      "Cook the beef in a hot pan until browned and set aside.",
+      "In the same pan, sauté onions and mushrooms in butter.",
+      "Add flour to the pan and cook for 1 minute.",
+      "Add beef broth and stir to combine.",
+      "Return the beef to the pan and simmer for 5 minutes.",
+      "Stir in sour cream and cook for another 2-3 minutes.",
+      "Serve over cooked egg noodles."
+    ]
+  }
+]
