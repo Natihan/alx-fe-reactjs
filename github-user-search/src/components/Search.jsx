@@ -19,18 +19,18 @@ function Search() {
     if (!searchTerm) return; // Don't proceed if search term is empty
 
     setLoading(true); // Set loading state to true
-    setMessage(''); // Reset message
-    setUserData(null); // Clear previous user data
+    setMessage(''); // Clear any previous messages
+    setUserData(null); // Clear any previous user data
 
     try {
       const data = await fetchUserData(searchTerm); // Fetch data from GitHub API
       if (data) {
         setUserData(data); // Set the fetched user data if found
       } else {
-        setMessage("Looks like we can't find the user"); // Show message if no user is found
+        setMessage("Looks like we can't find the user"); // Set message if no user found
       }
     } catch (err) {
-      setMessage("Looks like we can't find the user"); // Show message if API fails
+      setMessage("Looks like we can't find the user"); // Set message if API fails
     } finally {
       setLoading(false); // Stop loading after the API call completes
     }
