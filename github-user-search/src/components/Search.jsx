@@ -5,7 +5,7 @@ function Search() {
   const [searchTerm, setSearchTerm] = useState('');
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(''); // Error state to store error messages
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -16,17 +16,17 @@ function Search() {
     if (!searchTerm) return;
 
     setLoading(true);
-    setError('');
-    setUserData(null);
+    setError(''); // Reset error message on new search
+    setUserData(null); // Reset user data
 
     try {
       const data = await fetchUserData(searchTerm);
-      setUserData(data);
+      setUserData(data); // Set user data if the API request is successful
     } catch (err) {
-      setError('Looks like we can\'t find the user');
-      setUserData(null);
+      setError('Looks like we can\'t find the user'); // Display error message if user not found
+      setUserData(null); // Reset user data
     } finally {
-      setLoading(false);
+      setLoading(false); // Stop the loading indicator
     }
   };
 
@@ -43,18 +43,18 @@ function Search() {
         <button type="submit">Search</button>
       </form>
 
-      {/* Loading state */}
+      {/* Show Loading indicator while waiting for response */}
       {loading && <p>Loading...</p>}
 
-      {/* Error message */}
+      {/* Error message when API call fails */}
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      {/* User data display */}
+      {/* Display User data if available */}
       {userData && (
         <div className="user-info">
           <img src={userData.avatar_url} alt="User Avatar" width="150" />
           <h3>{userData.name || 'No Name Available'}</h3>
-          <p><strong>Username:</strong> {userData.login}</p> {/* Display the username */}
+          <p><strong>Username:</strong> {userData.login}</p> {/* GitHub login */}
           <p>{userData.bio || 'No Bio Available'}</p>
           <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
             Visit GitHub Profile
