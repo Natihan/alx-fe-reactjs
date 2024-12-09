@@ -6,38 +6,58 @@ const AddRecipeForm = () => {
   const [ingredients, setIngredients] = useState('');
   const [steps, setSteps] = useState('');
   const [image, setImage] = useState('');
-  const [error, setError] = useState('');
+  
+  // Step 2: Initialize state for error messages
+  const [errors, setErrors] = useState({});
 
-  // Step 2: Handle form submission
+  // Step 3: Validate the form fields
+  const validate = () => {
+    const newErrors = {};
+
+    // Check if title is provided
+    if (!title) newErrors.title = 'Title is required';
+    
+    // Check if ingredients are provided and contain at least two items
+    if (!ingredients) {
+      newErrors.ingredients = 'Ingredients are required';
+    } else if (ingredients.split(',').length < 2) {
+      newErrors.ingredients = 'Ingredients must have at least two items';
+    }
+
+    // Check if steps are provided
+    if (!steps) newErrors.steps = 'Preparation steps are required';
+
+    // If there are errors, set the error state
+    setErrors(newErrors);
+
+    // Return true if no errors, false otherwise
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Step 4: Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Simple validation
-    if (!title || !ingredients || !steps) {
-      setError('All fields are required!');
-      return;
+    // Validate the form
+    if (!validate()) {
+      return; // If validation fails, prevent form submission
     }
 
-    if (ingredients.split(',').length < 2) {
-      setError('Ingredients must have at least two items.');
-      return;
-    }
+    // Clear any previous errors
+    setErrors({});
 
-    // Clear any previous error message
-    setError('');
-
-    // Step 3: Create the recipe object to submit (you can expand this as needed)
+    // Prepare the recipe object to submit
     const newRecipe = {
       title,
       ingredients: ingredients.split(','),
       steps: steps.split('\n'),
-      image, // Assuming a valid URL or image path will be used
+      image, // Optional field
     };
 
-    // In a real app, here you would save this to a server or database.
-    console.log(newRecipe);
+    // In a real app, here you'd save this data to a database or server
+    console.log('New Recipe Submitted:', newRecipe);
 
-    // Reset the form fields
+    // Reset form fields
     setTitle('');
     setIngredients('');
     setSteps('');
@@ -48,8 +68,14 @@ const AddRecipeForm = () => {
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       <h1 className="text-3xl font-semibold text-center mb-4">Add a New Recipe</h1>
 
-      {/* Step 4: Error message display */}
-      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+      {/* Step 5: Display error messages */}
+      {Object.keys(errors).length > 0 && (
+        <div className="bg-red-100 text-red-500 p-4 mb-4 rounded-md">
+          {Object.values(errors).map((error, index) => (
+            <p key={index}>{error}</p>
+          ))}
+        </div>
+      )}
 
       <form onSubmit={handleSubmit}>
         {/* Recipe Title */}
@@ -60,7 +86,7 @@ const AddRecipeForm = () => {
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={`mt-1 p-2 w-full border ${errors.title ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
             placeholder="Enter the recipe title"
           />
         </div>
@@ -73,7 +99,7 @@ const AddRecipeForm = () => {
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
             rows="3"
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={`mt-1 p-2 w-full border ${errors.ingredients ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
             placeholder="Enter ingredients separated by commas"
           />
         </div>
@@ -86,7 +112,7 @@ const AddRecipeForm = () => {
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
             rows="5"
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={`mt-1 p-2 w-full border ${errors.steps ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
             placeholder="Enter the preparation steps"
           />
         </div>
