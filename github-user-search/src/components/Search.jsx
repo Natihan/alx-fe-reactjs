@@ -5,7 +5,7 @@ function Search() {
   const [searchTerm, setSearchTerm] = useState(''); // State to store the search term
   const [userData, setUserData] = useState(null); // State to store the fetched user data
   const [loading, setLoading] = useState(false); // State to manage loading indicator
-  const [error, setError] = useState(''); // State to store the error message
+  const [message, setMessage] = useState(''); // State to store the success or error message
 
   // Handle input field change
   const handleSearchChange = (e) => {
@@ -19,16 +19,18 @@ function Search() {
     if (!searchTerm) return; // Don't proceed if search term is empty
 
     setLoading(true); // Set loading state to true
-    setError(''); // Clear any previous error messages
-    setUserData(null); // Clear any previous user data
+    setMessage(''); // Reset message
+    setUserData(null); // Clear previous user data
 
     try {
       const data = await fetchUserData(searchTerm); // Fetch data from GitHub API
-      setUserData(data); // Set the fetched user data
+      if (data) {
+        setUserData(data); // Set the fetched user data if found
+      } else {
+        setMessage("Looks like we can't find the user"); // Show message if no user is found
+      }
     } catch (err) {
-      // This error message will be displayed if GitHub API responds with an error
-      setError("Looks like we can't find the user"); 
-      setUserData(null); // Clear user data on error
+      setMessage("Looks like we can't find the user"); // Show message if API fails
     } finally {
       setLoading(false); // Stop loading after the API call completes
     }
@@ -51,8 +53,8 @@ function Search() {
       {/* Loading indicator */}
       {loading && <p>Loading...</p>}
 
-      {/* Error message */}
-      {error && <p style={{ color: 'red' }}>{error}</p>}  {/* This will display "Looks like we can't find the user" */}
+      {/* Display message if user not found */}
+      {message && <p style={{ color: 'red' }}>{message}</p>}  {/* This will display "Looks like we can't find the user" */}
 
       {/* Displaying user data if available */}
       {userData && (
