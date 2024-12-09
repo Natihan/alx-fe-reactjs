@@ -15,18 +15,18 @@ function Search() {
     e.preventDefault();
     if (!searchTerm) return;
 
-    setLoading(true);
-    setError(''); // Reset error message on new search
-    setUserData(null); // Reset user data
+    setLoading(true);  // Start loading state
+    setError('');  // Reset error message on new search
+    setUserData(null);  // Clear previous user data
 
     try {
-      const data = await fetchUserData(searchTerm);
-      setUserData(data); // Set user data if the API request is successful
+      const data = await fetchUserData(searchTerm);  // Fetch user data from GitHub API
+      setUserData(data);  // If successful, set user data
     } catch (err) {
-      setError('Looks like we can\'t find the user'); // Display error message if user not found
-      setUserData(null); // Reset user data
+      setError('Looks like we can\'t find the user');  // Set error message if API call fails
+      setUserData(null);  // Clear any previous user data
     } finally {
-      setLoading(false); // Stop the loading indicator
+      setLoading(false);  // Stop loading state
     }
   };
 
@@ -43,18 +43,18 @@ function Search() {
         <button type="submit">Search</button>
       </form>
 
-      {/* Show Loading indicator while waiting for response */}
+      {/* Loading state: Show "Loading..." message while data is being fetched */}
       {loading && <p>Loading...</p>}
 
-      {/* Error message when API call fails */}
+      {/* Error message: If error state is set, display the error */}
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      {/* Display User data if available */}
+      {/* User data: If valid user data is available, display user information */}
       {userData && (
         <div className="user-info">
           <img src={userData.avatar_url} alt="User Avatar" width="150" />
           <h3>{userData.name || 'No Name Available'}</h3>
-          <p><strong>Username:</strong> {userData.login}</p> {/* GitHub login */}
+          <p><strong>Username:</strong> {userData.login}</p> {/* GitHub username */}
           <p>{userData.bio || 'No Bio Available'}</p>
           <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
             Visit GitHub Profile
