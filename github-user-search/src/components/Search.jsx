@@ -54,6 +54,7 @@ function Search() {
         <div className="user-info">
           <img src={userData.avatar_url} alt="User Avatar" width="150" />
           <h3>{userData.name || 'No Name Available'}</h3>
+          <p><strong>Username:</strong> {userData.login}</p> {/* Display the username */}
           <p>{userData.bio || 'No Bio Available'}</p>
           <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
             Visit GitHub Profile
