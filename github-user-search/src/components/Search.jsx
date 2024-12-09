@@ -1,34 +1,32 @@
 import React, { useState } from 'react';
-import { fetchUserData } from '../services/githubService'; // Import the function to fetch data
+import { fetchUserData } from '../services/githubService';
 
 function Search() {
-  const [searchTerm, setSearchTerm] = useState(''); // State for search term
-  const [userData, setUserData] = useState(null); // State for user data
-  const [loading, setLoading] = useState(false); // State for loading indicator
-  const [error, setError] = useState(''); // State for error message
+  const [searchTerm, setSearchTerm] = useState('');
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  // Handle input change in search bar
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  // Handle form submission (search)
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    if (!searchTerm) return; // Do nothing if search term is empty
+    if (!searchTerm) return; // Don't proceed if searchTerm is empty
 
-    setLoading(true); // Set loading to true
-    setError(''); // Reset error message
-    setUserData(null); // Clear user data
+    setLoading(true);
+    setError('');  // Reset any previous error messages
+    setUserData(null);  // Reset any previous user data
 
     try {
-      const data = await fetchUserData(searchTerm); // Fetch user data using search term
-      setUserData(data); // Update user data if successful
+      const data = await fetchUserData(searchTerm);
+      setUserData(data); // Set fetched user data
     } catch (err) {
-      setError("Looks like we can't find the user"); // Set error message if the user is not found
-      setUserData(null); // Clear previous user data
+      setError("Looks like we can't find the user"); // Set the error message if the fetch fails
+      setUserData(null); // Clear user data on error
     } finally {
-      setLoading(false); // Stop loading state after API call
+      setLoading(false); // Stop loading once request is complete
     }
   };
 
@@ -40,23 +38,23 @@ function Search() {
           type="text"
           placeholder="Enter GitHub username"
           value={searchTerm}
-          onChange={handleSearchChange} // Handle change in input field
+          onChange={handleSearchChange}
         />
         <button type="submit">Search</button>
       </form>
 
-      {/* Display loading indicator */}
+      {/* Loading state */}
       {loading && <p>Loading...</p>}
 
-      {/* Display error message if the search fails */}
-      {error && <p style={{ color: 'red' }}>{error}</p>} 
+      {/* Error message */}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      {/* Display user profile if user data is available */}
+      {/* User data display */}
       {userData && (
         <div className="user-info">
           <img src={userData.avatar_url} alt="User Avatar" width="150" />
           <h3>{userData.name || 'No Name Available'}</h3>
-          <p><strong>Username:</strong> {userData.login}</p> {/* Display GitHub username */}
+          <p><strong>Username:</strong> {userData.login}</p> {/* Display the username */}
           <p>{userData.bio || 'No Bio Available'}</p>
           <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
             Visit GitHub Profile
