@@ -1,12 +1,13 @@
-// githubService.js
 import axios from 'axios';
 
-export const fetchUserData = async (username) => {
+export const fetchUserData = async (query) => {
+  const url = `https://api.github.com/search/users?q=${query}&per_page=10`;
+
   try {
-    const response = await axios.get(`https://api.github.com/users/${username}`);
-    return response.data; // return user data if found
-  } catch (error) {
-    // Throwing an error when the user is not found (e.g., 404 response from GitHub API)
-    throw new Error('User not found');
+    const response = await axios.get(url);
+    return response.data;
+  } catch (err) {
+    console.error('Error fetching data from GitHub API:', err);
+    throw err;
   }
 };
