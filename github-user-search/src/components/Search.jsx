@@ -2,80 +2,71 @@ import React, { useState } from 'react';
 import { fetchUserData } from '../services/githubService'; // Import the function to fetch user data
 
 function Search() {
-  const [searchTerm, setSearchTerm] = useState(''); // State to store the search term
-  const [userData, setUserData] = useState(null); // State to store the fetched user data
-  const [loading, setLoading] = useState(false); // State to manage loading indicator
-  const [message, setMessage] = useState(''); // State to store the success or error message
+  const [searchTerm, setSearchTerm] = useState('');  // State for the search term
+  const [userData, setUserData] = useState(null);    // State for user data
+  const [loading, setLoading] = useState(false);     // State to show loading status
+  const [message, setMessage] = useState('');        // State for error or success message
 
-  // Handle input field change
+  // Handle changes in the search input
   const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value); // Update the search term as user types
+    setSearchTerm(e.target.value);
   };
 
-  // Handle form submission
+  // Handle form submission and search logic
   const handleSearchSubmit = async (e) => {
-    e.preventDefault(); // Prevent form submission from refreshing the page
+    e.preventDefault();
 
-    if (!searchTerm) return; // Don't proceed if search term is empty
+    if (!searchTerm) return; // Do nothing if search term is empty
 
-    setLoading(true); // Set loading state to true
-    setMessage(''); // Clear any previous messages
-    setUserData(null); // Clear any previous user data
+    setLoading(true); // Show loading spinner
+    setMessage('');    // Clear previous messages
+    setUserData(null); // Clear previous user data
 
     try {
-      const data = await fetchUserData(searchTerm); // Fetch data from GitHub API
-      
+      const data = await fetchUserData(searchTerm);  // Fetch user data from the GitHub API
+
       if (!data || data.message === 'Not Found') {
-        // If data is null or GitHub returns a "Not Found" message, set the error message
+        // If the API returns no data or user not found, show the error message
         setMessage("Looks like we can't find the user");
-        setUserData(null); // Ensure that user data is cleared
+        setUserData(null);
       } else {
-        // If data is found, set the userData state
+        // If data is found, display user information
         setUserData(data);
       }
     } catch (err) {
-      // If any error occurs during the fetch, show the message
+      // Handle any errors during the API call (network error, etc.)
       setMessage("Looks like we can't find the user");
-      setUserData(null); // Clear any existing user data
+      setUserData(null);
     } finally {
-      setLoading(false); // Stop loading after the API call completes
+      setLoading(false); // Hide loading spinner after API call completes
     }
   };
 
   return (
     <div className="search-container">
       <h2>Search for a GitHub User</h2>
-      
+
+      {/* Form for searching */}
       <form onSubmit={handleSearchSubmit}>
         <input
           type="text"
           placeholder="Enter GitHub username"
           value={searchTerm}
-          onChange={handleSearchChange} // Update the search term as user types
+          onChange={handleSearchChange} // Update search term as the user types
         />
         <button type="submit">Search</button>
       </form>
 
-      {/* Loading indicator */}
+      {/* Display loading message while fetching data */}
       {loading && <p>Loading...</p>}
 
-      {/* Display message if user not found */}
-      {message && <p style={{ color: 'red' }}>{message}</p>}  {/* This will display "Looks like we can't find the user" */}
+      {/* Display error message if no user is found */}
+      {message && <p style={{ color: 'red' }}>{message}</p>}  {/* Will show "Looks like we can't find the user" */}
 
-      {/* Displaying user data if available */}
+      {/* Display user information if found */}
       {userData && (
         <div className="user-info">
           <img src={userData.avatar_url} alt="User Avatar" width="150" />
           <h3>{userData.name || 'No Name Available'}</h3>
           <p><strong>Username:</strong> {userData.login}</p>
-          <p>{userData.bio || 'No Bio Available'}</p>
-          <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
-            Visit GitHub Profile
-          </a>
-        </div>
-      )}
-    </div>
-  );
-}
-
-export default Search;
+          <p>{userData.bio || 'No Bio 
