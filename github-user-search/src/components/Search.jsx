@@ -24,13 +24,19 @@ function Search() {
 
     try {
       const data = await fetchUserData(searchTerm); // Fetch data from GitHub API
-      if (data) {
-        setUserData(data); // Set the fetched user data if found
+      
+      if (!data || data.message === 'Not Found') {
+        // If data is null or GitHub returns a "Not Found" message, set the error message
+        setMessage("Looks like we can't find the user");
+        setUserData(null); // Ensure that user data is cleared
       } else {
-        setMessage("Looks like we can't find the user"); // Set message if no user found
+        // If data is found, set the userData state
+        setUserData(data);
       }
     } catch (err) {
-      setMessage("Looks like we can't find the user"); // Set message if API fails
+      // If any error occurs during the fetch, show the message
+      setMessage("Looks like we can't find the user");
+      setUserData(null); // Clear any existing user data
     } finally {
       setLoading(false); // Stop loading after the API call completes
     }
